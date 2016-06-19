@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block graph %}
+
+	<div class="col-md-offset-1 col-md-5 basic-map">
+
+		<style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="states_with_names" src="//danielcodes.maps.arcgis.com/apps/Embed/index.html?webmap=53199f4f2ead4f5299f55b6537dfff5a&amp;extent=-145.0635,16.8477,-53.1299,54.394&amp;zoom=true&amp;scale=true&amp;disable_scroll=true&amp;theme=light"></iframe></div>
+
+		<h2 class="text-center">Positive sentiment</h2>
+
+	</div>
+
+	<div class="col-md-5 basic-map">
+		<style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="states_with_names-negative" src="//danielcodes.maps.arcgis.com/apps/Embed/index.html?webmap=5fbb4c9eb91b496b8631071cff1ece9e&amp;extent=-145.0635,16.8477,-53.1299,54.394&amp;zoom=true&amp;scale=true&amp;disable_scroll=true&amp;theme=light"></iframe></div>
+
+		<h2 class="text-center">Negative sentiment</h2>
+
+	</div>
+
+
+
+
+
+{% endblock %}
+
+
