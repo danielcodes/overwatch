@@ -40,15 +40,15 @@ def getTweets():
 
     return locationUsers
 
-print 'the total tweets that have location si ', len(location)
-print 'location \n'
-print location 
+# print 'the total tweets that have location si ', len(location)
+# print 'location \n'
+# print location 
     
 
 # ok, have the objets
-print 'the total tweets that have location si ', len(locationUsers)
-print 'tweets\n'
-print locationUsers
+# print 'the total tweets that have location si ', len(locationUsers)
+# print 'tweets\n'
+# print locationUsers
  
 # expecting a function here to filter the bad locations, not in USA
 

@@ -1,29 +1,71 @@
+"""Run sentiment analysis on the text of each tweeet
+   start packaging back the store with location, no text unfortunately
+"""
+
+KEY = '894fc27b-f874-48f0-a624-042ba2a63d1c'
+
 from havenondemand.hodclient import *
 import json
-import tweepy
-client = HODClient("894fc27b-f874-48f0-a624-042ba2a63d1c", version="v1")
-# Get hashtags from twitter
-params = {'text': 'I hate Haven OnDemand!'}
-# Twitter Streaming API # Requires ESRI to handle dynamic data ..
-#
-# consumer_key=" "
-# consumer_secret=" "
-# access_token=" "
-# access_token_secret=" "
-response_async = client.post_request(params, HODApps.ANALYZE_SENTIMENT, async=True)
-jobID = response_async['jobID']
-response = client.get_job_result(jobID)
-print response
+from get_tweets import getTweets
 
-# print response['aggregate']['score']
-score_value=response['aggregate']['score']
-print score_value
-# Normalizing values in range bwetween 0 and 1
-#   newvalue= (max'-min')/(max-min)*(value-max)+max'
-score_value = score_value+1
-print score_value
+# to get to user tex, we do obj.text
+tweets = getTweets()
+
+client = HODClient(KEY, version="v1")
+
+# take this out later
+# testing by cutting tweets in half
+tweets = tweets[40:]
+print 'the numebr of tweets has been cut to ', len(tweets)
+
+scores = []
+for obj in tweets:
+
+    params = {'text': obj.text}
+
+    response_async = client.post_request(params, HODApps.ANALYZE_SENTIMENT, async=True)
+    jobID = response_async['jobID']
+    response = client.get_job_result(jobID)
+
+    print response
+
+    # print response['aggregate']['score']
+    score_value = response['aggregate']['score']
+    sentiment = str(response['aggregate']['sentiment'])
+
+    # push into the new dict
+    final_dict = {}
+    final_dict['positive'] = score_value
+    final_dict['name'] = obj.user.location
+
+    if sentiment == 'positive' or sentiment == 'neutral':
+        final_dict['color'] = 'blue'
+    else:
+        final_dict['color'] = 'red'
+
+    scores.append(final_dict) 
+
+    print '\n'
+
+print 'the final dict we gon use is ', scores
 
 
+# # testing individually cus I'm dumb
+# params = {'text': 'Im like hey wassup hello'}
+
+# response_async = client.post_request(params, HODApps.ANALYZE_SENTIMENT, async=True)
+# jobID = response_async['jobID']
+# response = client.get_job_result(jobID)
+
+# print response
+
+# # print response['aggregate']['score']
+# score_value = response['aggregate']['score']
+# print score_value
+
+# sentiment = response['aggregate']['sentiment']
+# print sentiment 
+# print type(sentiment)
 
 
 
