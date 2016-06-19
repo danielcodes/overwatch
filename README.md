@@ -21,9 +21,10 @@ Can only proceed once the tweets have been obtained
 
 # TODO
 * [x] make it so that each map has unique data - fixed
-- start working on the backend of requests, start with twitter -> hp on demand -> display
+- start working on the backend of requests, start with twitter -> hp on demand -> call func to update, basically updating the 'positive' value
 
-* [ ] create a reset to clear the choropleth down to 0
+* [x] create a reset to clear the choropleth down to 0
 
+* [ ] get twitter api to work
 
 
