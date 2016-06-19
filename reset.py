@@ -56,20 +56,44 @@ state_ids = { 'hawaii': 1,
               'florida': 49,
               'michigan': 50,
               'alaska': 51,
-
             }
 
 
 token = '9uoHmj0khoGE-IPi0suBX32onwoIAsSJzSZwpB1MKv8v5gwYkP382gLLNop5tA__HFQP-SX14R8h11vY6cXqKup_gH1zNs7CY4CIcK9wDCEJkejdMCtjNCfwAftlMpLqQOfEewk6nC_uMLOrWgUGJw..' 
-
-payload = {'f': 'json', 'updates': '[{"attributes":{"ObjectId":25,"positive":0.9,"name":"california"}}]' , 'token': token}
 url_blues = 'http://services3.arcgis.com/zBkEB8YtoDaCmWOf/arcgis/rest/services/states/FeatureServer/0/applyEdits'
+payload = {'f': 'json', 'updates': '[{"attributes":{"ObjectId":25,"positive":0.9}}]' , 'token': token}
 
-r = requests.post(url_blues, data=payload)
-print r.text
+# r = requests.post(url_blues, data=payload)
+# print r.text
 
 # now to reset every single one, down to 0.3
+# probably the ugliest code I've written
 
+# stitch together, 'objectid' + id
+ids = []
+for k, v in state_ids.iteritems():
+    ids.append({'ObjectId': v})
+
+# have to pass a different objectid each time here
+dataList = []
+lowestColor = {'positive': 0.4}
+
+# x, y, copy z of x, and update z with y
+# reset to 0 successful
+for obj in ids:
+    # mesh two dicts
+    attr = lowestColor.copy()
+    attr.update(obj)
+
+    # turn this to a str when passing
+    dataList.append({'attributes': attr})
+
+    # ready to make request
+    payload = {'f': 'json', 'updates': str(dataList) , 'token': token}
+    r = requests.post(url_blues, data=payload)
+    print r.text
+
+   
 
 
 
@@ -82,5 +106,4 @@ print r.text
 # r = requests.post(url_reds, data=payload_reds)
 # print r
 # print r.text
-
 
