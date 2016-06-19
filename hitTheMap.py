@@ -79,7 +79,7 @@ for k, v in state_ids.iteritems():
 def resetBlues():
     # have to pass a different objectid each time here
     dataList = []
-    lowestColor = {'positive': 0.9}
+    lowestColor = {'positive': 0.4}
 
     # x, y, copy z of x, and update z with y
     # reset to 0 successful
@@ -104,7 +104,7 @@ url_reds = 'http://services3.arcgis.com/zBkEB8YtoDaCmWOf/arcgis/rest/services/re
 def resetReds():
     # have to pass a different objectid each time here
     dataList = []
-    lowestColor = {'positive': 0.9}
+    lowestColor = {'positive': 0.4}
 
     # x, y, copy z of x, and update z with y
     # reset to 0 successful
@@ -126,16 +126,32 @@ def resetReds():
 # format is 'positive': color, 'name': state, object id
 scores = getScores();
 print 'the scores are ', scores
+print 'the length is', len(scores)
 
 # separate scores to blue nad red
 # scores is a list of objects, with positive, 
-def getBlueStates(scores):
+# parametrized between blue and red
+def getStates(scores, color):
 
-     
+    colorList = []     
+    for score in scores:
+        if score['color'] == color:
+            colorList.append(score)
+
+    return colorList 
 
 
-    return
+blues = getStates(scores, 'blue')
+reds = getStates(scores, 'red')
 
+print blues
+print 'length is ', len(blues)
+
+print reds
+print 'length is ', len(reds)
+
+
+# get two lists here
 
 def updateMap():
 
@@ -143,9 +159,6 @@ def updateMap():
     # find the the id of the states
 
     return
-
-
-
 
 
 
