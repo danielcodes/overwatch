@@ -83,10 +83,6 @@ def getTweets():
 
     return locationUsers
 
-tweets = getTweets()
-for t in tweets:
-    print t.user.location
-
 
 # print 'the total tweets that have location si ', len(location)
 # print 'location \n'

@@ -15,7 +15,6 @@ client = HODClient(KEY, version="v1")
 
 # take this out later
 # testing by cutting tweets in half
-tweets = tweets[40:]
 print 'the numebr of tweets has been cut to ', len(tweets)
 
 def getScores():
@@ -38,7 +37,7 @@ def getScores():
 
         # push into the new dict
         final_dict = {}
-        final_dict['positive'] = score_value
+        final_dict['positive'] = abs(score_value)
         final_dict['name'] = obj.user.location
 
         if sentiment == 'positive' or sentiment == 'neutral':
@@ -50,7 +49,8 @@ def getScores():
 
     return scores
 
-# print 'the final dict we gon use is ', getScores()
+
+print 'the final dict we gon use is ', getScores()
 
 
 # # testing individually cus I'm dumb
