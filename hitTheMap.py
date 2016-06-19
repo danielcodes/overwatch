@@ -123,12 +123,6 @@ def resetReds():
         print r.text
 
 
-# final dict
-# format is 'positive': color, 'name': state, object id
-scores = getScores();
-print 'the scores are ', scores
-print 'the length is', len(scores)
-
 # separate scores to blue nad red
 # scores is a list of objects, with positive, 
 # parametrized between blue and red
@@ -187,6 +181,11 @@ def updateReds(scores):
         print r.text
 
 
+# final dict
+# format is 'positive': color, 'name': state, object id
+scores = getScores();
+print 'the scores are ', scores
+print 'the length is', len(scores)
 
 blues = getStates(scores, 'blue')
 reds = getStates(scores, 'red')
@@ -199,10 +198,5 @@ print 'length is ', len(reds)
 
 updateBlues(blues)
 updateReds(reds)
-
-
-
-
-
 
 

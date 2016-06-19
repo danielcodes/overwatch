@@ -96,11 +96,6 @@ def getTweets():
  
 # expecting a function here to filter the bad locations, not in USA
 
-
-
-
-
-
 # f = open('dummy.txt', 'w')
 # f.write(str(location))
 # f.close()
