@@ -22,6 +22,7 @@ Can only proceed once the tweets have been obtained
 # TODO
 - make it so that each map has unique data
 - start working on the backend of requests, start with twitter -> hp on demand -> display
+- more problems, after cloning down the data, it clones the object id as well, so if I try to replicate it, it create a new objectid2, sigh
 
 
 
