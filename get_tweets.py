@@ -62,7 +62,7 @@ api = twitter.Api(consumer_key = CONSUMER,
 
 def getTweets():
 
-    results = api.GetSearch(raw_query="q=guncontrol%20&result_type=recent&since=2016&count=100")
+    results = api.GetSearch(raw_query="q=guncontrol%20&result_type=recent&since=2015&count=100")
 
     # get rid of location after
     location = []

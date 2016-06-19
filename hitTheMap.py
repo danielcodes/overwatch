@@ -90,6 +90,7 @@ def resetBlues():
 
         # turn this to a str when passing
         dataList.append({'attributes': attr})
+        print dataList
 
         # ready to make request
         payload = {'f': 'json', 'updates': str(dataList) , 'token': token}
@@ -141,6 +142,52 @@ def getStates(scores, color):
     return colorList 
 
 
+# get two lists here
+
+def updateBlues(scores):
+
+    dataList = []
+    # secord param to tell them apart
+    # find the the id of the states
+    for obj in scores:
+        #add the id to the object
+        objId = state_ids[obj['name']]
+        obj['ObjectId'] = objId
+
+        # g
+        # print 'object is ', obj
+        dataList.append({'attributes': obj})
+        # print 'datalist is ', dataList
+
+        # objects now have their ids
+        # time to do requests
+        payload = {'f': 'json', 'updates': str(dataList) , 'token': token}
+        r = requests.post(url_blues, data=payload)
+        print r.text
+
+def updateReds(scores):
+
+    dataList = []
+    # secord param to tell them apart
+    # find the the id of the states
+    for obj in scores:
+        #add the id to the object
+        objId = state_ids[obj['name']]
+        obj['ObjectId2'] = objId
+
+        # g
+        print 'object is ', obj
+        dataList.append({'attributes': obj})
+        print 'datalist is ', dataList
+
+        # objects now have their ids
+        # time to do requests
+        payload = {'f': 'json', 'updates': str(dataList) , 'token': token}
+        r = requests.post(url_reds, data=payload)
+        print r.text
+
+
+
 blues = getStates(scores, 'blue')
 reds = getStates(scores, 'red')
 
@@ -150,15 +197,9 @@ print 'length is ', len(blues)
 print reds
 print 'length is ', len(reds)
 
+updateBlues(blues)
+updateReds(reds)
 
-# get two lists here
-
-def updateMap():
-
-    # unlike the resets, only certain items are targeted
-    # find the the id of the states
-
-    return
 
 
 

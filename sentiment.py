@@ -50,7 +50,7 @@ def getScores():
     return scores
 
 
-print 'the final dict we gon use is ', getScores()
+# print 'the final dict we gon use is ', getScores()
 
 
 # # testing individually cus I'm dumb
