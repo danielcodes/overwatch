@@ -4,6 +4,7 @@
    to use: just import resetBlues and resetReds functions
 """
 
+from sentiment import getScores
 import requests
 
 # dict (state => id)
@@ -78,7 +79,7 @@ for k, v in state_ids.iteritems():
 def resetBlues():
     # have to pass a different objectid each time here
     dataList = []
-    lowestColor = {'positive': 0.4}
+    lowestColor = {'positive': 0.9}
 
     # x, y, copy z of x, and update z with y
     # reset to 0 successful
@@ -103,7 +104,7 @@ url_reds = 'http://services3.arcgis.com/zBkEB8YtoDaCmWOf/arcgis/rest/services/re
 def resetReds():
     # have to pass a different objectid each time here
     dataList = []
-    lowestColor = {'positive': 0.4}
+    lowestColor = {'positive': 0.9}
 
     # x, y, copy z of x, and update z with y
     # reset to 0 successful
@@ -119,6 +120,35 @@ def resetReds():
         payload = {'f': 'json', 'updates': str(dataList) , 'token': token}
         r = requests.post(url_reds, data=payload)
         print r.text
+
+
+# final dict
+# format is 'positive': color, 'name': state, object id
+scores = getScores();
+print 'the scores are ', scores
+
+# separate scores to blue nad red
+# scores is a list of objects, with positive, 
+def getBlueStates(scores):
+
+     
+
+
+    return
+
+
+def updateMap():
+
+    # unlike the resets, only certain items are targeted
+    # find the the id of the states
+
+    return
+
+
+
+
+
+
 
 
 

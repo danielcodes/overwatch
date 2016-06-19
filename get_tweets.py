@@ -2,6 +2,48 @@
    see if we can get location too
 '''
 
+States = {'AL':'alabama','AK':'alaska','AZ':'arizona','AR':'arkansa','CA':'california','CO':'colorado','CT':'connecticut','DE':'delaware','FL':'florida','GA':'georgia','HI':'hawaii','ID':'idaho','IL':'illinois','IN':'indiana','IA':'iowa','KS':'kansas','KY':'kentucky','LA':'louisiana','ME':'maine','MD':'maryland','MA':'massachusetts','MI':'michigan','MN':'minnesota','MS':'mississippi','MO':'missouri','MT':'montana','NE':'nebraska','NV':'nevada','NH':'new hampshire','NY':'new york','NC':'north carolina','ND':'north dakota','OH':'ohio','OK':'oklahoma','OR':'oregon','PA':'pennsylvania','RI':'rhode island','SC':'south carolina','SD':'south dakota','TN':'tenessee','TX':'texas','UT':'utah','VT':'vermont','VA':'virginia','WV':'west virginia','WI':'wisconsin','WY':'wyoming','GU':'guam','PR':'puerto rico','VI':'virgin islands', 'NJ': 'new jersey', 'WA': 'washington'}
+
+# from twitter user.location, filter out non US places
+# input is the array of tweets, looking for user.location
+def getState(tweet):
+
+    acro = States.keys()
+    full = States.values()
+
+#     print acro
+#     print full
+
+    # this needs verifying, location is a string
+    location = tweet.user.location
+    location = location.split(',') 
+
+    # print location
+    # for 'CA', ' USA', ' WA' cases, remove whitespace
+
+    # if there are more than two items, check in
+    # everything should fall under
+    if len(location) == 2:
+        # one item at a time
+        # two if checks for each array
+        location[1] = location[1].replace(' ', '')
+        # print location
+
+        if location[0] in acro:
+            tweet.user.location = States[location[0]]
+            return States[location[0]]
+
+        if location[1] in acro:
+            tweet.user.location = States[location[1]]
+            return  States[location[1]]
+    else: # one item
+
+        if location[0] in acro:
+            tweet.user.location = States[location[0]]
+            return  States[location[0]]
+
+    return None
+
 import twitter
 
 CONSUMER = 'zaVMgRSwOmxUSgLTR8E0FBol4'
@@ -22,16 +64,17 @@ def getTweets():
 
     results = api.GetSearch(raw_query="q=guncontrol%20&result_type=recent&since=2016&count=100")
 
-
     # get rid of location after
     location = []
     locationUsers = [] # this contains the tweets still
+
+    # after getting results, run the function to filter location
 
     for obj in results:
         user = obj.user
 
         try:
-            if user.location:
+            if user.location and getState(obj):
                 location.append(user.location)
                 locationUsers.append(obj) #filter yo
 
@@ -39,6 +82,11 @@ def getTweets():
             pass
 
     return locationUsers
+
+tweets = getTweets()
+for t in tweets:
+    print t.user.location
+
 
 # print 'the total tweets that have location si ', len(location)
 # print 'location \n'
@@ -60,10 +108,3 @@ def getTweets():
 # f = open('dummy.txt', 'w')
 # f.write(str(location))
 # f.close()
-
-
-
-
-
-
-

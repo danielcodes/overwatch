@@ -18,36 +18,39 @@ client = HODClient(KEY, version="v1")
 tweets = tweets[40:]
 print 'the numebr of tweets has been cut to ', len(tweets)
 
-scores = []
-for obj in tweets:
+def getScores():
+    scores = []
 
-    params = {'text': obj.text}
+    for obj in tweets:
 
-    response_async = client.post_request(params, HODApps.ANALYZE_SENTIMENT, async=True)
-    jobID = response_async['jobID']
-    response = client.get_job_result(jobID)
+        params = {'text': obj.text}
 
-    print response
+        response_async = client.post_request(params, HODApps.ANALYZE_SENTIMENT, async=True)
+        jobID = response_async['jobID']
+        response = client.get_job_result(jobID)
 
-    # print response['aggregate']['score']
-    score_value = response['aggregate']['score']
-    sentiment = str(response['aggregate']['sentiment'])
+        print response
+        print '\n'
 
-    # push into the new dict
-    final_dict = {}
-    final_dict['positive'] = score_value
-    final_dict['name'] = obj.user.location
+        # print response['aggregate']['score']
+        score_value = response['aggregate']['score']
+        sentiment = str(response['aggregate']['sentiment'])
 
-    if sentiment == 'positive' or sentiment == 'neutral':
-        final_dict['color'] = 'blue'
-    else:
-        final_dict['color'] = 'red'
+        # push into the new dict
+        final_dict = {}
+        final_dict['positive'] = score_value
+        final_dict['name'] = obj.user.location
 
-    scores.append(final_dict) 
+        if sentiment == 'positive' or sentiment == 'neutral':
+            final_dict['color'] = 'blue'
+        else:
+            final_dict['color'] = 'red'
 
-    print '\n'
+        scores.append(final_dict) 
 
-print 'the final dict we gon use is ', scores
+    return scores
+
+# print 'the final dict we gon use is ', getScores()
 
 
 # # testing individually cus I'm dumb
