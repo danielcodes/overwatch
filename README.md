@@ -11,7 +11,7 @@ TODO, maybe add a description if it doesn't bloat the UI too much
 Can only proceed once the tweets have been obtained
 
 ### HP on demand part
-* [ ] Get the sentiment value from each tweet regarding gun control
+* [x] Get the sentiment value from each tweet regarding gun control
 * [x] Place those sentiment values on two choropleths maps
 
 
@@ -24,7 +24,19 @@ Can only proceed once the tweets have been obtained
 - start working on the backend of requests, start with twitter -> hp on demand -> call func to update, basically updating the 'positive' value
 
 * [x] create a reset to clear the choropleth down to 0
+* [x] get twitter api to work
+* [x] pip the tweets text to HP and get back the score
 
-* [ ] get twitter api to work
+* [ ] work on creating the final request, the update on the map
+
+
+
+
+
+
+
+
+
+
 
 
