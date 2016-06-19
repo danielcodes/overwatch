@@ -20,9 +20,10 @@ Can only proceed once the tweets have been obtained
 * [x] Tab to another page that has a choropleth maps between the divide on the country on gun control
 
 # TODO
-- make it so that each map has unique data
+* [x] make it so that each map has unique data - fixed
 - start working on the backend of requests, start with twitter -> hp on demand -> display
-- more problems, after cloning down the data, it clones the object id as well, so if I try to replicate it, it create a new objectid2, sigh
+
+* [ ] create a reset to clear the choropleth down to 0
 
 
 
