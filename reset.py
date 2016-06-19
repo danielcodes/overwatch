@@ -1,5 +1,7 @@
 """request to update all the states to a level ground of 0.4
    to send request, the object id of the state is needed, so created a dict with (state => id)
+
+   to use: just import resetBlues and resetReds functions
 """
 
 import requests
@@ -60,50 +62,63 @@ state_ids = { 'hawaii': 1,
 
 
 token = '9uoHmj0khoGE-IPi0suBX32onwoIAsSJzSZwpB1MKv8v5gwYkP382gLLNop5tA__HFQP-SX14R8h11vY6cXqKup_gH1zNs7CY4CIcK9wDCEJkejdMCtjNCfwAftlMpLqQOfEewk6nC_uMLOrWgUGJw..' 
+
 url_blues = 'http://services3.arcgis.com/zBkEB8YtoDaCmWOf/arcgis/rest/services/states/FeatureServer/0/applyEdits'
 payload = {'f': 'json', 'updates': '[{"attributes":{"ObjectId":25,"positive":0.9}}]' , 'token': token}
 
-# r = requests.post(url_blues, data=payload)
-# print r.text
-
-# now to reset every single one, down to 0.3
-# probably the ugliest code I've written
-
 # stitch together, 'objectid' + id
-ids = []
+ids_blues = []
+ids_reds = []
 for k, v in state_ids.iteritems():
-    ids.append({'ObjectId': v})
+    ids_blues.append({'ObjectId': v})
+    ids_reds.append({'ObjectId2': v})
 
-# have to pass a different objectid each time here
-dataList = []
-lowestColor = {'positive': 0.4}
+# should be parametrized
 
-# x, y, copy z of x, and update z with y
-# reset to 0 successful
-for obj in ids:
-    # mesh two dicts
-    attr = lowestColor.copy()
-    attr.update(obj)
+def resetBlues():
+    # have to pass a different objectid each time here
+    dataList = []
+    lowestColor = {'positive': 0.4}
 
-    # turn this to a str when passing
-    dataList.append({'attributes': attr})
+    # x, y, copy z of x, and update z with y
+    # reset to 0 successful
+    for obj in ids_blues:
+        # mesh two dicts
+        attr = lowestColor.copy()
+        attr.update(obj)
 
-    # ready to make request
-    payload = {'f': 'json', 'updates': str(dataList) , 'token': token}
-    r = requests.post(url_blues, data=payload)
-    print r.text
+        # turn this to a str when passing
+        dataList.append({'attributes': attr})
 
-   
-
-
-
+        # ready to make request
+        payload = {'f': 'json', 'updates': str(dataList) , 'token': token}
+        r = requests.post(url_blues, data=payload)
+        print r.text
 
 
 # now for reds, gotta change objectId to 2, ugh.
-# payload_reds = {'f': 'json', 'updates': '[{"attributes":{"ObjectId2":25,"positive":0.4,"name":"california"}}]' , 'token': token}
-# url_reds = 'http://services3.arcgis.com/zBkEB8YtoDaCmWOf/arcgis/rest/services/reds/FeatureServer/0/applyEdits'
+payload_reds = {'f': 'json', 'updates': '[{"attributes":{"ObjectId2":25,"positive":0.4,"name":"california"}}]' , 'token': token}
+url_reds = 'http://services3.arcgis.com/zBkEB8YtoDaCmWOf/arcgis/rest/services/reds/FeatureServer/0/applyEdits'
 
-# r = requests.post(url_reds, data=payload_reds)
-# print r
-# print r.text
+def resetReds():
+    # have to pass a different objectid each time here
+    dataList = []
+    lowestColor = {'positive': 0.4}
+
+    # x, y, copy z of x, and update z with y
+    # reset to 0 successful
+    for obj in ids_reds:
+        # mesh two dicts
+        attr = lowestColor.copy()
+        attr.update(obj)
+
+        # turn this to a str when passing
+        dataList.append({'attributes': attr})
+
+        # ready to make request
+        payload = {'f': 'json', 'updates': str(dataList) , 'token': token}
+        r = requests.post(url_reds, data=payload)
+        print r.text
+
+
 
