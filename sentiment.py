@@ -50,28 +50,14 @@ def getScores():
     return scores
 
 
-# print 'the final dict we gon use is ', getScores()
+print 'the final dict we gon use is \n'
 
+scores = getScores()
 
-# # testing individually cus I'm dumb
-# params = {'text': 'Im like hey wassup hello'}
+for s in scores:
+    print s
 
-# response_async = client.post_request(params, HODApps.ANALYZE_SENTIMENT, async=True)
-# jobID = response_async['jobID']
-# response = client.get_job_result(jobID)
-
-# print response
-
-# # print response['aggregate']['score']
-# score_value = response['aggregate']['score']
-# print score_value
-
-# sentiment = response['aggregate']['sentiment']
-# print sentiment 
-# print type(sentiment)
-
-
-
+# another filter here to take average the opinions of the same state
 
 
 

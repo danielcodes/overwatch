@@ -190,13 +190,16 @@ print 'the length is', len(scores)
 blues = getStates(scores, 'blue')
 reds = getStates(scores, 'red')
 
-print blues
-print 'length is ', len(blues)
+print 'length for blues is ', len(blues)
+for s in blues:
+    print s
 
-print reds
-print 'length is ', len(reds)
 
-updateBlues(blues)
-updateReds(reds)
+print 'length for reds is ', len(reds)
+for s in reds:
+    print s
+
+# updateBlues(blues)
+# updateReds(reds)
 
 
